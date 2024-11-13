@@ -1,8 +1,19 @@
 public class fecha {
-    private int dia;
-    private int mes;
-    private int anio;
 
+    //atributos:
+    protected int dia;
+    protected int mes;
+    protected int anio;
 
-    // ... constructores y métodos para comparar fechas ...
+    // ... constructores
+    public fecha (){}
+
+    public fecha (int dia, int mes, int anio){
+        this.dia = dia;
+        this.mes = mes;
+        this.anio = anio;
+    }
+
+    // métodos para comparar fechas ...
+
 }

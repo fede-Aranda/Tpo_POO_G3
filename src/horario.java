@@ -1,6 +1,4 @@
-import java.util.concurrent.LinkedBlockingDeque;
-
-public class horario2 {
+public class horario {
     private boolean[] CuartosDeHoraEnUso = new boolean[96];//array de horas utilizadas representadas en grupos de 4 booleans. longitud:(24 . 4)
 
     private void setEvento(int hora_Inicio, int minutos_Inicio, int hora_Final, int minutos_Final){
