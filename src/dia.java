@@ -1,14 +1,11 @@
-public class dia extends fecha {
+public class dia{
     private evento[] eventos;
     private int topeDeEventos;
     private int eventosCargados;
     private horario horario;
     // constructores
 
-    public dia (int dia, int mes, int anio){
-        this.dia = dia;
-        this.mes = mes;
-        this.anio = anio;
+    public dia (){
         topeDeEventos = 9; //tope de 10 eventos por dia
         eventosCargados = 0;
         this.horario = new horario();
