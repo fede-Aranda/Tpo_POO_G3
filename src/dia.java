@@ -3,7 +3,7 @@ public class dia extends fecha {
     private int topeDeEventos;
     private int eventosCargados;
     private horario horario;
-    // ... constructores y
+    // constructores
 
     public dia (int dia, int mes, int anio){
         this.dia = dia;
