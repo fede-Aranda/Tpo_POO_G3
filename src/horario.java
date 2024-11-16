@@ -1,5 +1,7 @@
 public class horario {
     private boolean[] CuartosDeHoraEnUso = new boolean[96];//array de horas utilizadas representadas en grupos de 4 booleans. longitud:(24 . 4)
+    //cada
+    private boolean full;
 
     private void setEvento(int hora_Inicio, int minutos_Inicio, int hora_Final, int minutos_Final){
         //Sanitizo la entrada de minutos

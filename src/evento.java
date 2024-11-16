@@ -6,6 +6,9 @@ public class evento {
     private String descripcion;
     private String[] integrantes;
 
+    private int horaInicio;
+    private int duracion;
+
     // ... constructores y getters/setters ...
 
 
