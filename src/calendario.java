@@ -22,7 +22,7 @@ public class calendario {
         int anioDelEvento = fecha.getAnio();
         if((anioDelEvento > (anioInicio + cantidadDeAniosAlmacenados)) || (anioDelEvento < anioInicio) ){
             throw new RuntimeException("El año del evento se encuentra fuera de los limites del calendario");
-        } else{ // (inicio + x = evento) => (evento - inicio = x)
+        } else{ // (año de inicio + x = año del evento) => (evento - inicio = x)
             int posicionArray = anioDelEvento - anioInicio;
             ((anios[posicionArray].getMes(fecha.getMes())).getDia(fecha.getDia())).agregarEvento(evento);
         }
