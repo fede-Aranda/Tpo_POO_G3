@@ -1,4 +1,4 @@
-public class evento {
+public class evento implements Comparable<evento> {
     private String titulo;
     private fecha fecha;
 
@@ -9,6 +9,27 @@ public class evento {
     private int horaInicio;
     private int duracion;
 
+    @Override
+    public int compareTo(evento otroEvento) {
+        return fecha.compareTo(otroEvento.fecha);
+    }
+    }
+
+    public void setHoraInicio(int horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
+    public void setDuracion(int duracion) {
+        this.duracion = duracion;
+    }
+
+    public int getHoraInicio() {
+        return horaInicio;
+    }
+
+    public int getDuracion() {
+        return duracion;
+    }
     // ... constructores y getters/setters ...
 
 

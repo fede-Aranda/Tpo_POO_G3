@@ -1,4 +1,4 @@
-public class fecha {
+public class fecha implements Comparable<fecha>{
 
     //atributos:
     private int dia;
@@ -13,6 +13,12 @@ public class fecha {
     }
 
     // getters y setters ...
+
+
+    @Override
+    public int compareTo(fecha otraFecha) {
+        return ;
+    }
 
     public void setDia(int dia) {
         this.dia = dia;
