@@ -5,13 +5,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class gestorDeReservas {
-    private calendario calendario;
-    public TreeSet<evento>  eventos;
+public class GestorDeReservas {
+    private Calendario calendario;
+    public TreeSet<Evento>  eventos;
 
-    public gestorDeReservas(){
+    public GestorDeReservas(){
         eventos = new TreeSet<>();
-        calendario = new calendario(2020,2030);
+        calendario = new Calendario(2020,2030);
     }
 
     public void generarEvento(
@@ -27,9 +27,9 @@ public class gestorDeReservas {
         int duracionEnHoras = horaFinal - horaInicio;
         int duracionEnMinutos = minutosFinal - minutosInicio;
 
-        evento nuevoEvento = new evento(
+        Evento nuevoEvento = new Evento(
                 titulo,
-                new fecha(dia, mes, anio),
+                new Fecha(dia, mes, anio),
                 ubicacion,
                 descripcion,
                 integrantes,
@@ -40,14 +40,14 @@ public class gestorDeReservas {
         calendario.agregarEvento(nuevoEvento);
     }
 
-    public void eliminarEvento(evento eventoEnCuestion){
+    public void eliminarEvento(Evento eventoEnCuestion){
         if(eventos.remove(eventoEnCuestion)){
             calendario.eliminarEvento(eventoEnCuestion);
         }
     }
 
     public void editarEvento(
-            evento evento,
+            Evento evento,
             String newTitulo,
             int dia, int mes, int anio,
             String newUbicacion,
@@ -62,7 +62,7 @@ public class gestorDeReservas {
 
         evento.editar(
                 newTitulo,
-                new fecha(dia, mes, anio),
+                new Fecha(dia, mes, anio),
                 newUbicacion,
                 newDescripcion,
                 newIntegrantes,
@@ -86,7 +86,7 @@ public class gestorDeReservas {
         String rutaCompleta = directorioGuardados.toString() + "/copiaParaRecuperacionDeEventos.txt";
 
         try (PrintWriter writer = new PrintWriter(new FileWriter(rutaArchivo))) {
-            for (evento evento : eventos) {
+            for (Evento evento : eventos) {
                 String linea = evento.getTitulo() + "," +
                         evento.getFecha().getDia() + "," +
                         evento.getFecha().getMes() + "," +
@@ -120,14 +120,14 @@ public class gestorDeReservas {
                 String[] datos = linea.split(",");
 
                 String titulo = datos[0];
-                fecha fechaEvento = new fecha(Integer.parseInt(datos[1]),Integer.parseInt(datos[2]),Integer.parseInt(datos[3]));
+                Fecha fechaEvento = new Fecha(Integer.parseInt(datos[1]),Integer.parseInt(datos[2]),Integer.parseInt(datos[3]));
                 String ubicacion = datos[4];
                 String descripcion = datos[5];
                 String[] integrantes = datos[6].split("/"); // Convertir la cadena en un array
                 int horaInicio = Integer.parseInt(datos[7]);
                 int duracion = Integer.parseInt(datos[8]);
 
-                evento nuevoEvento = new evento(titulo, fechaEvento, ubicacion, descripcion, integrantes, horaInicio, duracion);
+                Evento nuevoEvento = new Evento(titulo, fechaEvento, ubicacion, descripcion, integrantes, horaInicio, duracion);
                 eventos.add(nuevoEvento);
                 calendario.agregarEvento(nuevoEvento);
             }
@@ -138,7 +138,7 @@ public class gestorDeReservas {
     // Los eventos ya están ordenados en el TreeSet
     // Imprimir los eventos ordenados
     public void imprimirEventosPorConsola(){
-        for(evento evento : eventos) {
+        for(Evento evento : eventos) {
             System.out.println(evento.getTitulo() + " - " + evento.getFecha().getDia() + " / "
                     + evento.getFecha().getMes() +  " / "
                     + evento.getFecha().getAnio() + " "
@@ -148,8 +148,7 @@ public class gestorDeReservas {
 
     //los PostBlock son de 15 minutos
     private int convertirHoraToPostBlock(int horas, int minutos) {
-        int postBlock = horas * 4 + (minutos >= 15 ? 1 : 0) + (minutos >= 30 ? 1 : 0) + (minutos >= 45 ? 1 : 0);
-        return postBlock;
+        return horas * 4 + (minutos >= 15 ? 1 : 0) + (minutos >= 30 ? 1 : 0) + (minutos >= 45 ? 1 : 0);
     }
 
     private int[] convertirPostBlockToHora(int horaPostBlock) { //el string devuelto siempre será de 2 posiciones

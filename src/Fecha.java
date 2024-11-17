@@ -1,4 +1,4 @@
-public class fecha implements Comparable<fecha>{
+public class Fecha implements Comparable<Fecha>{
 
     //atributos:
     private int dia;
@@ -6,7 +6,7 @@ public class fecha implements Comparable<fecha>{
     private int anio;
 
     // ... constructores
-    public fecha (int dia, int mes, int anio){
+    public Fecha(int dia, int mes, int anio){
         this.dia = dia;
         this.mes = mes;
         this.anio = anio;
@@ -16,7 +16,7 @@ public class fecha implements Comparable<fecha>{
 
 
     @Override
-    public int compareTo(fecha otraFecha) {
+    public int compareTo(Fecha otraFecha) {
         if (this.anio != otraFecha.anio) {
             return this.anio - otraFecha.anio;
         } else if (this.mes != otraFecha.mes) {

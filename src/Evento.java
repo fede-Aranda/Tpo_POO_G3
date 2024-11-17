@@ -1,8 +1,8 @@
-public class evento implements Comparable<evento>{
+public class Evento implements Comparable<Evento>{
 
     //atributos:
     private String titulo;
-    private fecha fecha;
+    private Fecha fecha;
 
     private String ubicacion;
     private String descripcion;
@@ -13,9 +13,9 @@ public class evento implements Comparable<evento>{
 
     //constructores:
 
-    public evento (
+    public Evento(
             String titulo,
-            fecha fecha,
+            Fecha fecha,
             String ubicacion,
             String descripcion,
             String[] integrantes,
@@ -47,10 +47,6 @@ public class evento implements Comparable<evento>{
         return horaInicio;
     }
 
-    public int getInicio (){
-        return horaInicio;
-    }
-
     public String getTitulo() {
         return titulo;
     }
@@ -59,11 +55,11 @@ public class evento implements Comparable<evento>{
         this.titulo = titulo;
     }
 
-    public fecha getFecha() {
+    public Fecha getFecha() {
         return fecha;
     }
 
-    public void setFecha(fecha fecha) {
+    public void setFecha(Fecha fecha) {
         this.fecha = fecha;
     }
 
@@ -95,7 +91,7 @@ public class evento implements Comparable<evento>{
 
     public void editar(
             String newTitulo,
-            fecha newFecha,
+            Fecha newFecha,
             String newUbicacion,
             String newDescripcion,
             String[] newIntegrantes,
@@ -103,7 +99,7 @@ public class evento implements Comparable<evento>{
             int newDuracion
     ){
         String titulo = getTitulo();
-        fecha fecha = getFecha();
+        Fecha fecha = getFecha();
         String ubicacion = getUbicacion();
         String descripcion = getUbicacion();
         String[] integrantes = getIntegrantes();
@@ -134,7 +130,7 @@ public class evento implements Comparable<evento>{
     }
 
     @Override
-    public int compareTo(evento otherEvento) {
+    public int compareTo(Evento otherEvento) {
         //comparar por fecha de inicio o por título.
         return this.getFecha().compareTo(otherEvento.getFecha()); // Compara por fecha
     }

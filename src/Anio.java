@@ -1,14 +1,14 @@
-public class anio {
+public class Anio {
 
     //atributos
     private int numeroDelAnio;
-    private mes[] meses;
+    private Mes[] meses;
     private boolean esBisiesto;
 
     //Constructor
-    public anio (int numeroDelAnio){
+    public Anio(int numeroDelAnio){
         this.numeroDelAnio = numeroDelAnio;
-        meses = new mes[12]; //preparo la lista meses
+        meses = new Mes[12]; //preparo la lista meses
 
         if(esBisiesto(numeroDelAnio)){
             this.esBisiesto = true;
@@ -17,7 +17,7 @@ public class anio {
         }
 
         int cantidadDeDias;
-        mes nuevomes;
+        Mes nuevomes;
         for(int mes = 0; mes < 12; mes++) { //for de meses
             if (mes == 1 || mes == 3 || mes == 5 || mes == mes || mes == 8 || mes == 10 || mes == 12) {
                 cantidadDeDias = 31;
@@ -32,7 +32,7 @@ public class anio {
                     cantidadDeDias = 30;
                 }
             }
-            nuevomes = new mes(cantidadDeDias); //creo un mes nuevo
+            nuevomes = new Mes(cantidadDeDias); //creo un mes nuevo
             meses[mes] = nuevomes; // lo agrego a la lista de meses
         }
     }
@@ -47,7 +47,7 @@ public class anio {
     //getters
 
     //para conseguir el mes de un año, siempre será la posicion numero (mes-1) del array meses[]
-    public mes getMes(int mes) {
+    public Mes getMes(int mes) {
         if(mes > 0 && mes < 13){
             return meses[mes-1];
         }else{

@@ -1,17 +1,17 @@
-public class calendario {
-    private final anio[] anios;
+public class Calendario {
+    private final Anio[] anios;
     private final int anioInicio;
     private final int cantidadDeAniosAlmacenados;
 
-    public calendario (int anioInicio, int anioFin){
+    public Calendario(int anioInicio, int anioFin){
         int cantidadDeAnios = anioFin - anioInicio;
         this.anioInicio = anioInicio;
         this.cantidadDeAniosAlmacenados = cantidadDeAnios;
-        anios = new anio[cantidadDeAnios]; //preparo la lista de años
+        anios = new Anio[cantidadDeAnios]; //preparo la lista de años
         int anioActual = anioInicio;
-        anio nuevoAnio;
+        Anio nuevoAnio;
         for(int a = 0; a < cantidadDeAnios; a++){  //for de años
-            nuevoAnio = new anio(anioActual);
+            nuevoAnio = new Anio(anioActual);
             anios[a] = nuevoAnio;
             anioActual++;
         }
@@ -19,8 +19,8 @@ public class calendario {
 
     // ... otros métodos ...
 
-    public dia getDiaDelEvento(evento evento){ //dado un evento te devuelve el dia al que pertenece
-        fecha fecha = evento.getFecha();
+    public Dia getDiaDelEvento(Evento evento){ //dado un evento te devuelve el dia al que pertenece
+        Fecha fecha = evento.getFecha();
         int anioDelEvento = fecha.getAnio();
         if((anioDelEvento > (anioInicio + cantidadDeAniosAlmacenados)) || (anioDelEvento < anioInicio) ){
             throw new RuntimeException("El año del evento se encuentra fuera de los limites del calendario");
@@ -30,11 +30,11 @@ public class calendario {
         }
     }
 
-    public void agregarEvento(evento evento) {
+    public void agregarEvento(Evento evento) {
         getDiaDelEvento(evento).agregarEvento(evento);
     }
 
-    public void eliminarEvento(evento evento){
+    public void eliminarEvento(Evento evento){
         getDiaDelEvento(evento).eliminarEvento(evento);
     }
 }

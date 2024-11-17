@@ -1,26 +1,24 @@
 import java.util.TreeSet;
 
-public class dia{
-    private TreeSet<evento> eventos;
-    //private horario horario;
-
+public class Dia {
+    private TreeSet<Evento> eventos;
 
     // constructores
 
-    public dia (){
+    public Dia(){
         //this.horario = new horario();
         eventos = new TreeSet<>();
     }
 
     // getters/setters ...
 
-    public void agregarEvento(evento eventoEnCuestion){
+    public void agregarEvento(Evento eventoEnCuestion){
         //if(this.horario.agregarEvento(eventoEnCuestion)){
             eventos.add(eventoEnCuestion); //agrego el evento en cuestion a la lista de eventos
         //}
     }
 
-    public void eliminarEvento(evento eventoEnCuestion){
+    public void eliminarEvento(Evento eventoEnCuestion){
         eventos.remove(eventoEnCuestion);
     }
 }
