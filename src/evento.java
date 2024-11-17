@@ -1,4 +1,4 @@
-public class evento {
+public class evento implements Comparable<evento>{
 
     //atributos:
     private String titulo;
@@ -31,6 +31,10 @@ public class evento {
 
     public void setDuracion(int duracion) {
         this.duracion = duracion;
+    }
+
+    public int getDuracion() {
+        return duracion;
     }
 
     public int getHoraInicio() {
@@ -79,5 +83,13 @@ public class evento {
 
     public void setIntegrantes(String[] integrantes) {
         this.integrantes = integrantes;
+    }
+
+    //metodos:
+
+    @Override
+    public int compareTo(evento otherEvento) {
+        //comparar por fecha de inicio o por título.
+        return this.getFecha().compareTo(otherEvento.getFecha()); // Compara por fecha
     }
 }
