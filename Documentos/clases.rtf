@@ -1,0 +1,72 @@
+clase gestorDeEventos:
+- Calendario
+    - Dia[]
+        - Evento[]
+- gestionarEvento()
+
+
+clase Evento:
+- lista (string) integrantes
+- ubicacion
+- descripcion
+- Fecha
+
+
+clase Calendario
+- lista de clases Dia[]
+
+clase Dia
+- int numeroDeDia
+- int Mes
+- int año
+- lista de clases Evento[] eventos
+- horarios
+
+
+presentar la lisa de eventos pasados y futuros:
+array de eventos[]
+recorro el array consultando a cada Evento su Fecha,
+la comparo con la Fecha actual.
+
+______________________________________________________________
+clases ejemplo:
+
+public class Evento {
+    private String titulo;
+    private Fecha fechaInicio;
+    private Fecha fechaFin;
+    private String ubicacion;
+    private String descripcion;
+    private List<String> integrantes;
+    private EstadoEvento estado; // ACTIVO, CANCELADO, POSTPUESTO
+
+    // ... constructores y getters/setters ...
+}
+
+public class Fecha {
+    private int Dia;
+    private int Mes;
+    private int Anio;
+
+    // ... constructores y métodos para comparar fechas ...
+}
+
+public class Calendario {
+    private Dia[] dias;
+
+    public void agregarEvento(Evento Evento) {
+        // ... lógica para agregar el Evento al día correspondiente ...
+    }
+
+    // ... otros métodos ...
+}
+
+public class Dia {
+    private int numero;
+    private int Mes;
+    private int Anio;
+    private Evento[] eventos;
+    private boolean[] horario //array de 24hs . 4 (1/4 de hora)
+    // ... constructores y getters/setters ...
+}
+

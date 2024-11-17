@@ -1,15 +1,34 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        GestorDeReservas gestor = new GestorDeReservas();
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+        gestor.generarEvento("Reunión de equipo", 15, 3, 2023, "Sala de juntas", "Planificar el proyecto", new String[]{"Juan", "María", "Pedro"}, 10, 0, 12, 0);
+        gestor.generarEvento("Cumpleaños de Ana", 25, 5, 2023, "Mi casa", "Fiesta sorpresa", new String[]{"Ana", "Luis", "Sofía"}, 19, 30, 22, 0);
+
+        gestor.imprimirEventosPorConsola();
+
+/*
+        try {
+            gestor.guardarDatos("misEventos.txt");
+            System.out.println("Eventos guardados correctamente.");
+        } catch (IOException e) {
+            System.out.println("Error al guardar los eventos: " + e.getMessage());
         }
+
+        // Limpiar el gestor de eventos
+        gestor.eventos.clear();
+
+        // Cargar los eventos desde el archivo
+        try {
+            gestor.cargarDatos();
+            System.out.println("Eventos cargados correctamente.");
+        } catch (FileNotFoundException e) {
+            System.out.println("Error al cargar los eventos: " + e.getMessage());
+        }
+
+        // Imprimir los eventos cargados (si la carga fue exitosa)
+        gestor.imprimirEventosPorConsola();
+        }*/
     }
+
 }
