@@ -1,8 +1,8 @@
 public class Mes {
 
     //atributos
-    private Dia[] dias;
-    private int cantidadDeDias;
+    private final Dia[] dias;
+    private final int cantidadDeDias;
 
     //constructor
     public Mes(int cantidadDeDias){

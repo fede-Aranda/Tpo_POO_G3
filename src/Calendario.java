@@ -37,4 +37,10 @@ public class Calendario {
     public void eliminarEvento(Evento evento){
         getDiaDelEvento(evento).eliminarEvento(evento);
     }
+
+    public boolean existeAnio(int anio){}
+
+    public boolean existeFecha(Fecha fecha){
+
+    }
 }

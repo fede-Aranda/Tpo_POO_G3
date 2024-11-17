@@ -14,7 +14,6 @@ public class Fecha implements Comparable<Fecha>{
 
     // getters y setters ...
 
-
     @Override
     public int compareTo(Fecha otraFecha) {
         if (this.anio != otraFecha.anio) {
@@ -38,9 +37,7 @@ public class Fecha implements Comparable<Fecha>{
         this.anio = anio;
     }
 
-    public int getDia() {
-        return dia;
-    }
+    public int getDia(){return dia;}
 
     public int getMes() {
         return mes;
