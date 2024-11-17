@@ -15,11 +15,13 @@ public class dia{
     // getters/setters ...
 
     public void agregarEvento(evento eventoEnCuestion){
-        if(eventosCargados < topeDeEventos) {
-            eventos[eventosCargados] = eventoEnCuestion; //agrego el evento en cuestion a la lista de eventos
-            eventosCargados++; //se incrementa la cantidad de eventos cargados
-        }else{
-            throw new RuntimeException("maximo_de_eventos_por_dia_alcanzado");
+        if(this.horario.agregarEvento(eventoEnCuestion)){
+            if(eventosCargados < topeDeEventos) {
+                eventos[eventosCargados] = eventoEnCuestion; //agrego el evento en cuestion a la lista de eventos
+                eventosCargados++; //se incrementa la cantidad de eventos cargados
+            }else{
+                throw new RuntimeException("maximo_de_eventos_por_dia_alcanzado");
+            }
         }
     }
 }

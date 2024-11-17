@@ -1,4 +1,4 @@
-public class evento {
+public class evento extends comparable <evento>{
     private String titulo;
     private fecha fecha;
 
@@ -12,7 +12,6 @@ public class evento {
     @Override
     public int compareTo(evento otroEvento) {
         return fecha.compareTo(otroEvento.fecha);
-    }
     }
 
     public void setHoraInicio(int horaInicio) {
