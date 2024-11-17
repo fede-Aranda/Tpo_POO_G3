@@ -9,7 +9,7 @@ public class gestorDeReservas {
     private calendario calendario;
     public TreeSet<evento>  eventos;
 
-    public void inicializarGestor(){
+    public gestorDeReservas(){
         eventos = new TreeSet<>();
         calendario = new calendario(2020,2030);
     }
@@ -40,8 +40,39 @@ public class gestorDeReservas {
         calendario.agregarEvento(nuevoEvento);
     }
 
-    //guardar datos en archivo
+    public void eliminarEvento(evento eventoEnCuestion){
+        if(eventos.remove(eventoEnCuestion)){
+            calendario.eliminarEvento(eventoEnCuestion);
+        }
+    }
 
+    public void editarEvento(
+            evento evento,
+            String newTitulo,
+            int dia, int mes, int anio,
+            String newUbicacion,
+            String newDescripcion,
+            String[] newIntegrantes,
+            int horaInicio,
+            int minutosInicio,
+            int horaFinal,
+            int minutosFinal){
+        int duracionEnHoras = horaFinal - horaInicio;
+        int duracionEnMinutos = minutosFinal - minutosInicio;
+
+        evento.editar(
+                newTitulo,
+                new fecha(dia, mes, anio),
+                newUbicacion,
+                newDescripcion,
+                newIntegrantes,
+                convertirHoraToPostBlock(horaInicio,minutosInicio),
+                convertirHoraToPostBlock(duracionEnHoras,duracionEnMinutos)
+        );
+    }
+
+    //guardado y carga de datos en archivo_____________________________________________________________
+    //guardar datos en archivo
     public void guardarDatos(String rutaArchivo) throws IOException {
         // Obtener la ruta del directorio actual
         String directorioBase = Paths.get("").toAbsolutePath().toString();
@@ -102,15 +133,14 @@ public class gestorDeReservas {
             }
         }
     }
-
+    //__________________________________________________________________________________________
 
     // Los eventos ya están ordenados en el TreeSet
-
     // Imprimir los eventos ordenados
     public void imprimirEventosPorConsola(){
         for(evento evento : eventos) {
-            System.out.println(evento.getTitulo() + " - " + evento.getFecha().getDia() + " "
-                    + evento.getFecha().getMes() +  " "
+            System.out.println(evento.getTitulo() + " - " + evento.getFecha().getDia() + " / "
+                    + evento.getFecha().getMes() +  " / "
                     + evento.getFecha().getAnio() + " "
             );
         }
@@ -127,4 +157,5 @@ public class gestorDeReservas {
         int minutos = (horaPostBlock % 4) * 15;
         return new int[] { horas, minutos };
     }
+
 }

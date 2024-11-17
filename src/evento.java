@@ -13,7 +13,15 @@ public class evento implements Comparable<evento>{
 
     //constructores:
 
-    public evento (String titulo,fecha fecha,String ubicacion,String descripcion,String[] integrantes,int horaInicio,int duracion){
+    public evento (
+            String titulo,
+            fecha fecha,
+            String ubicacion,
+            String descripcion,
+            String[] integrantes,
+            int horaInicio,
+            int duracion
+    ){
         this.titulo = titulo;
         this.fecha = fecha;
         this.ubicacion = ubicacion;
@@ -33,9 +41,7 @@ public class evento implements Comparable<evento>{
         this.duracion = duracion;
     }
 
-    public int getDuracion() {
-        return duracion;
-    }
+    public int getDuracion() {return duracion;}
 
     public int getHoraInicio() {
         return horaInicio;
@@ -86,6 +92,46 @@ public class evento implements Comparable<evento>{
     }
 
     //metodos:
+
+    public void editar(
+            String newTitulo,
+            fecha newFecha,
+            String newUbicacion,
+            String newDescripcion,
+            String[] newIntegrantes,
+            int newHoraInicio,
+            int newDuracion
+    ){
+        String titulo = getTitulo();
+        fecha fecha = getFecha();
+        String ubicacion = getUbicacion();
+        String descripcion = getUbicacion();
+        String[] integrantes = getIntegrantes();
+        int horaInicio = getHoraInicio();
+        int duracion = getDuracion();
+
+        if( !(titulo.equals(newTitulo)) && newTitulo != null ){
+            setTitulo(newTitulo);
+        }
+        if(fecha != newFecha && newFecha != null ){
+            setFecha(newFecha);
+        }
+        if( !(ubicacion.equals(newUbicacion)) && newUbicacion != null ){
+            setUbicacion(newUbicacion);
+        }
+        if(!(descripcion.equals(newDescripcion)) && newDescripcion != null ){
+            setDescripcion(newDescripcion);
+        }
+        if(integrantes != newIntegrantes && newIntegrantes != null ){
+            setIntegrantes(newIntegrantes);
+        }
+        if(horaInicio != newHoraInicio){
+            setHoraInicio(newHoraInicio);
+        }
+        if(duracion != newDuracion){
+            setDuracion(newDuracion);
+        }
+    }
 
     @Override
     public int compareTo(evento otherEvento) {
