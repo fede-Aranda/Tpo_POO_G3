@@ -80,4 +80,6 @@ public class evento {
     public void setIntegrantes(String[] integrantes) {
         this.integrantes = integrantes;
     }
+
+    public int getDuracion(){return duracion;}
 }
