@@ -41,7 +41,7 @@ public class gestorDeReservas {
         if (resto >= 8) { cociente++; }
         return cociente; //redondeo al cuarto de hora mas cercano
     }
-    private int convertirAPOSBLOCK(int hora,int minutos){
+    private int convertirHoraToPostBlock(int hora,int minutos){
         int cuartos = redondearCuartoHora(minutos);
         int POSBLOCK = (hora*15) + cuartos;
         return  POSBLOCK;
@@ -63,8 +63,8 @@ public class gestorDeReservas {
         }return;
     }
 
-    private int convertirHoraToPostBlock(int horas, int minutos){} //devuelve la version en postBlock de una hora
-    private int convertirPostBlockToHora(){} //devuelve int horas, int minutos
+    //private int convertirHoraToPostBlock(int horas, int minutos){} //devuelve la version en postBlock de una hora
+    //private int convertirPostBlockToHora(){} //devuelve int horas, int minutos
 
 
 
