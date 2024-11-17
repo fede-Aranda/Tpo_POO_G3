@@ -17,7 +17,13 @@ public class fecha implements Comparable<fecha>{
 
     @Override
     public int compareTo(fecha otraFecha) {
-        return ;
+        if (this.anio != otraFecha.anio) {
+            return this.anio - otraFecha.anio;
+        } else if (this.mes != otraFecha.mes) {
+            return this.mes - otraFecha.mes;
+        } else {
+            return this.dia - otraFecha.dia;
+        }
     }
 
     public void setDia(int dia) {

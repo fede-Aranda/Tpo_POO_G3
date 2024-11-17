@@ -1,26 +1,52 @@
+import java.util.TreeSet;
+
 public class gestorDeReservas {
     private calendario calendario;
-    private evento[] eventos;
+    private TreeSet<evento>  eventos;
 
     public void inicializarGestor(){
+        eventos = new TreeSet<>();
         calendario = new calendario(2020,2030);
-
     }
 
-    public evento generarEvento(String titulo, int dia, int mes, int anio, String ubicacion, String descripcion, String[] integrantes){
+    public void generarEvento(
+            String titulo,
+            int dia, int mes, int anio,
+            String ubicacion,
+            String descripcion,
+            String[] integrantes,
+            int horaInicio,
+            int minutosInicio,
+            int horaFinal,
+            int minutosFinal){
+        int duracionEnHoras = horaFinal - horaInicio;
+        int duracionEnMinutos = minutosFinal - minutosInicio;
 
+        evento nuevoEvento = new evento(
+                titulo,
+                new fecha(dia, mes, anio),
+                ubicacion,
+                descripcion,
+                integrantes,
+                convertirHoraToPostBlock(horaInicio,minutosInicio),
+                convertirHoraToPostBlock(duracionEnHoras,duracionEnMinutos)
+        );
+
+        eventos.add(nuevoEvento);
     }
 
-    private fecha fecha;
 
-    private String ubicacion;
-    private String descripcion;
-    private String[] integrantes;
+    // Los eventos ya están ordenados en el TreeSet
 
+    // Imprimir los eventos ordenados
+    public void imprimirEventosPorConsola(){
+        for(evento evento : eventos) {
+            System.out.println(evento.getTitulo() + " - " + evento.getFecha().getDia());
+        }
+    }
 
-
-    private void convertirHoraToPostBlock(int horas, int minutos){} //devuelve la version en postBlock de una hora
-    private void convertirPostBlockToHora(){} //devuelve int horas, int minutos
+    private int convertirHoraToPostBlock(int horas, int minutos){} //devuelve la version en postBlock de una hora
+    private int convertirPostBlockToHora(){} //devuelve int horas, int minutos
 
 
 

@@ -1,4 +1,6 @@
-public class evento extends comparable <evento>{
+public class evento {
+
+    //atributos:
     private String titulo;
     private fecha fecha;
 
@@ -9,10 +11,19 @@ public class evento extends comparable <evento>{
     private int horaInicio;
     private int duracion;
 
-    @Override
-    public int compareTo(evento otroEvento) {
-        return fecha.compareTo(otroEvento.fecha);
+    //constructores:
+
+    public evento (String titulo,fecha fecha,String ubicacion,String descripcion,String[] integrantes,int horaInicio,int duracion){
+        this.titulo = titulo;
+        this.fecha = fecha;
+        this.ubicacion = ubicacion;
+        this.descripcion = descripcion;
+        this.integrantes = integrantes;
+        this.horaInicio = horaInicio;
+        this.duracion = duracion;
     }
+
+    // Getters y Setters:
 
     public void setHoraInicio(int horaInicio) {
         this.horaInicio = horaInicio;
@@ -26,15 +37,47 @@ public class evento extends comparable <evento>{
         return horaInicio;
     }
 
-    public int getDuracion() {
-        return duracion;
-    }
-    // ... constructores y getters/setters ...
-
     public int getInicio (){
-        return inicio;
+        return horaInicio;
     }
-    public int getDuracion(){
-        return duracion;
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public fecha getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(fecha fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String[] getIntegrantes() {
+        return integrantes;
+    }
+
+    public void setIntegrantes(String[] integrantes) {
+        this.integrantes = integrantes;
     }
 }
