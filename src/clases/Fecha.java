@@ -1,3 +1,5 @@
+package clases;
+
 public class Fecha implements Comparable<Fecha>{
 
     //atributos:
@@ -45,6 +47,10 @@ public class Fecha implements Comparable<Fecha>{
 
     public int getAnio() {
         return anio;
+    }
+
+    public String toStringFecha() {
+        return dia + "/" + mes + "/" + anio;
     }
 
 }

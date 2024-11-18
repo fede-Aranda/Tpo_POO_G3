@@ -1,4 +1,5 @@
-import java.util.Iterator;
+package clases;
+
 import java.util.TreeSet; //para las colecciones de clases (eventos en nuestro caso)
 import java.io.*; // Implementa un manejo de errores adecuado para capturar excepciones como IOException o FileNotFoundException.
 import java.util.Scanner; //Se utiliza un Scanner para leer el archivo línea por línea. Cada línea se divide en un array de cadenas, separando los valores por las comas. Luego, se crean nuevos objetos evento a partir de estos datos.
@@ -9,7 +10,7 @@ import algoritmos.input;
 
 public class GestorDeReservas {
     private Calendario calendario;
-    private TreeSet<Evento>  eventos;
+    public TreeSet<Evento>  eventos;
 
     public GestorDeReservas(){
         eventos = new TreeSet<>();
@@ -325,9 +326,9 @@ public class GestorDeReservas {
 
             System.out.println("\n ingrese la operacion que desea realizar: ");
             System.out.print("" + //
-                    "1 --> Agregar Evento \n" +
-                    "2 --> Eliminar Evento \n" +
-                    "3 --> Editar Evento \n" +
+                    "1 --> Agregar clases.Evento \n" +
+                    "2 --> Eliminar clases.Evento \n" +
+                    "3 --> Editar clases.Evento \n" +
                     "4 --> Guardar Cambios  \n" +
                     "5 --> Cargar ultima agenda \n" +
                     "6 --> Vaciar agenda \n" +

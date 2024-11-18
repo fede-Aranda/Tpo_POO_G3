@@ -1,40 +1,40 @@
 clase gestorDeEventos:
-- Calendario
-    - Dia[]
-        - Evento[]
+- clases.Calendario
+    - clases.Dia[]
+        - clases.Evento[]
 - gestionarEvento()
 
 
-clase Evento:
+clase clases.Evento:
 - lista (string) integrantes
 - ubicacion
 - descripcion
-- Fecha
+- clases.Fecha
 
 
-clase Calendario
-- lista de clases Dia[]
+clase clases.Calendario
+- lista de clases clases.Dia[]
 
-clase Dia
+clase clases.Dia
 - int numeroDeDia
-- int Mes
+- int clases.Mes
 - int año
-- lista de clases Evento[] eventos
+- lista de clases clases.Evento[] eventos
 - horarios
 
 
 presentar la lisa de eventos pasados y futuros:
 array de eventos[]
-recorro el array consultando a cada Evento su Fecha,
-la comparo con la Fecha actual.
+recorro el array consultando a cada clases.Evento su clases.Fecha,
+la comparo con la clases.Fecha actual.
 
 ______________________________________________________________
 clases ejemplo:
 
-public class Evento {
+public class clases.Evento {
     private String titulo;
-    private Fecha fechaInicio;
-    private Fecha fechaFin;
+    private clases.Fecha fechaInicio;
+    private clases.Fecha fechaFin;
     private String ubicacion;
     private String descripcion;
     private List<String> integrantes;
@@ -43,29 +43,29 @@ public class Evento {
     // ... constructores y getters/setters ...
 }
 
-public class Fecha {
-    private int Dia;
-    private int Mes;
-    private int Anio;
+public class clases.Fecha {
+    private int clases.Dia;
+    private int clases.Mes;
+    private int clases.Anio;
 
     // ... constructores y métodos para comparar fechas ...
 }
 
-public class Calendario {
-    private Dia[] dias;
+public class clases.Calendario {
+    private clases.Dia[] dias;
 
-    public void agregarEvento(Evento Evento) {
-        // ... lógica para agregar el Evento al día correspondiente ...
+    public void agregarEvento(clases.Evento clases.Evento) {
+        // ... lógica para agregar el clases.Evento al día correspondiente ...
     }
 
     // ... otros métodos ...
 }
 
-public class Dia {
+public class clases.Dia {
     private int numero;
-    private int Mes;
-    private int Anio;
-    private Evento[] eventos;
+    private int clases.Mes;
+    private int clases.Anio;
+    private clases.Evento[] eventos;
     private boolean[] horario //array de 24hs . 4 (1/4 de hora)
     // ... constructores y getters/setters ...
 }
