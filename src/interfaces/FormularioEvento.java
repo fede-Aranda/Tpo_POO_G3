@@ -60,9 +60,7 @@ public class FormularioEvento extends JDialog {
         agregarCampoFormulario(formularioPanel, gbc, "Hora Fin:", spinnerHoraFin = new JSpinner(new SpinnerNumberModel(0, 0, 23, 1)), 9);
         agregarCampoFormulario(formularioPanel, gbc, "Minuto Fin:", spinnerMinutoFin = new JSpinner(new SpinnerNumberModel(0, 0, 45, 15)), 10);
 
-
         add(formularioPanel, BorderLayout.CENTER);
-
 
         // Panel de botones
         JPanel botonesPanel = new JPanel();

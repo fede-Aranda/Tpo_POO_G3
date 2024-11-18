@@ -13,8 +13,8 @@ public class InterfazEvento extends JFrame {
     private JButton btnAgregarEvento;
     private JButton btnVerDetalle;
 
-    public InterfazEvento(GestorDeReservas gestor) {
-        this.gestor = gestor;
+    public InterfazEvento() {
+        this.gestor = new GestorDeReservas();
 
         setTitle("Gestor de Eventos");
         setSize(400, 300);
