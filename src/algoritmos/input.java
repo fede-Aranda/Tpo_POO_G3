@@ -53,6 +53,18 @@ public class input{
         return string;
     }
 
+    public boolean yesOrNo (){
+        String string;
+        System.out.print("ingrese su respuesta (y/n): ");
+        string = entrada.nextLine();
+        System.out.println();
+        while(!string.equals("n") && !string.equals("N") && !string.equals("y") && !string.equals("Y") ){
+            System.out.println("Debe ingresar una respuesta válida (y/n): ");
+            string = entrada.nextLine();
+        }
+        return (string.equals("y") || string.equals("Y"));
+    }
+
 //al finalizar el codigo recordar llamar al metodo cerrar() para cerrar el scanner.
     public void cerrar(){
         entrada.close();

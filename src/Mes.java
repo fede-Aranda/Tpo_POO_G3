@@ -17,6 +17,11 @@ public class Mes {
 
     //getters
 
+
+    public int getCantidadDeDias() {
+        return cantidadDeDias;
+    }
+
     //para conseguir el dia de un mes, siempre será la posicion numero (dia-1) del array dias[]
     public Dia getDia(int dia){
         if(dia < 1 || dia > cantidadDeDias){

@@ -17,16 +17,25 @@ public class Calendario {
         }
     }
 
-    // ... otros métodos ...
+    //demas metodos:
 
-    public Dia getDiaDelEvento(Evento evento){ //dado un evento te devuelve el dia al que pertenece
+    public Dia getDiaDelEvento(Evento evento) {
         Fecha fecha = evento.getFecha();
         int anioDelEvento = fecha.getAnio();
-        if((anioDelEvento > (anioInicio + cantidadDeAniosAlmacenados)) || (anioDelEvento < anioInicio) ){
-            throw new RuntimeException("El año del evento se encuentra fuera de los limites del calendario");
-        } else{ // (año de inicio + x = año del evento) => (evento - inicio = x)
+        int mes = fecha.getMes();
+        int dia = fecha.getDia();
+        if (!existeAnio(anioDelEvento)) {
+            throw new RuntimeException("El año del evento se encuentra fuera de los límites del calendario");
+        } else {
             int posicionArray = anioDelEvento - anioInicio;
-            return (anios[posicionArray].getMes(fecha.getMes())).getDia(fecha.getDia());
+            // Verificamos si la posición en el arreglo es válida y si el mes y día existen en ese año
+            if (posicionArray >= 0 && posicionArray < anios.length &&
+                    mes >= 1 && mes <= 12 &&
+                    dia >= 1 && dia <= anios[posicionArray].getMes(mes).getCantidadDeDias()) {
+                return anios[posicionArray].getMes(mes).getDia(dia);
+            } else {
+                return null; // Indicamos que no se encontró el día
+            }
         }
     }
 
@@ -38,9 +47,22 @@ public class Calendario {
         getDiaDelEvento(evento).eliminarEvento(evento);
     }
 
-    public boolean existeAnio(int anio){}
+    public boolean existeAnio(int anio){
+        return(!(anio > (anioInicio + cantidadDeAniosAlmacenados)) || (anio < anioInicio));
+    }
 
     public boolean existeFecha(Fecha fecha){
-
+        int anioDelEvento = fecha.getAnio();
+        int mes = fecha.getMes();
+        int dia = fecha.getDia();
+        if (!existeAnio(anioDelEvento)) {
+            return false;
+        } else {
+            int posicionArray = anioDelEvento - anioInicio;
+            // Verificamos si la posición en el arreglo es válida y si el mes y día existen en ese año
+            return posicionArray >= 0 && posicionArray < anios.length &&
+                    mes >= 1 && mes <= 12 &&
+                    dia >= 1 && dia <= anios[posicionArray].getMes(mes).getCantidadDeDias();
+        }
     }
 }

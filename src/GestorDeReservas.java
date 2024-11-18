@@ -1,3 +1,4 @@
+import java.util.Iterator;
 import java.util.TreeSet; //para las colecciones de clases (eventos en nuestro caso)
 import java.io.*; // Implementa un manejo de errores adecuado para capturar excepciones como IOException o FileNotFoundException.
 import java.util.Scanner; //Se utiliza un Scanner para leer el archivo línea por línea. Cada línea se divide en un array de cadenas, separando los valores por las comas. Luego, se crean nuevos objetos evento a partir de estos datos.
@@ -47,6 +48,33 @@ public class GestorDeReservas {
         calendario.agregarEvento(nuevoEvento);
     }
 
+    public void generarEvento(
+            String titulo,
+            Fecha fecha,
+            String ubicacion,
+            String descripcion,
+            String[] integrantes,
+            int horaInicio,
+            int minutosInicio,
+            int horaFinal,
+            int minutosFinal){
+
+        int duracionEnHoras = horaFinal - horaInicio;
+        int duracionEnMinutos = minutosFinal - minutosInicio;
+
+        Evento nuevoEvento = new Evento(
+                titulo,
+                fecha,
+                ubicacion,
+                descripcion,
+                integrantes,
+                convertirHoraToPostBlock(horaInicio,minutosInicio),
+                convertirHoraToPostBlock(duracionEnHoras,duracionEnMinutos)
+        );
+        eventos.add(nuevoEvento);
+        calendario.agregarEvento(nuevoEvento);
+    }
+
     public void eliminarEvento(Evento eventoEnCuestion){
         if(eventos.remove(eventoEnCuestion)){
             calendario.eliminarEvento(eventoEnCuestion);
@@ -80,7 +108,7 @@ public class GestorDeReservas {
 
     //guardado y carga de datos en archivo_____________________________________________________________
     //guardar datos en archivo
-    public void guardarDatos(String rutaArchivo) throws IOException {
+    public void guardarDatos() throws IOException {
         // Obtener la ruta del directorio actual
         String directorioBase = Paths.get("").toAbsolutePath().toString();
 
@@ -92,17 +120,17 @@ public class GestorDeReservas {
         // Construir la ruta completa del archivo
         String rutaCompleta = directorioGuardados.toString() + "/copiaParaRecuperacionDeEventos.txt";
 
-        try (PrintWriter writer = new PrintWriter(new FileWriter(rutaArchivo))) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(rutaCompleta))) {
             for (Evento evento : eventos) {
-                String linea = evento.getTitulo() + "," +
-                        evento.getFecha().getDia() + "," +
-                        evento.getFecha().getMes() + "," +
-                        evento.getFecha().getAnio() + "," +
-                        evento.getUbicacion() + "," +
-                        evento.getDescripcion() + "," +
+                String linea = evento.getTitulo() + ";" +
+                        evento.getFecha().getDia() + ";" +
+                        evento.getFecha().getMes() + ";" +
+                        evento.getFecha().getAnio() + ";" +
+                        evento.getUbicacion() + ";" +
+                        evento.getDescripcion() + ";" +
                         // Convertir el array de integrantes en una cadena (por ejemplo, usando String.join)
-                        String.join("/", evento.getIntegrantes()) + "," +
-                        evento.getHoraInicio() + "," +
+                        String.join("#", evento.getIntegrantes()) + ";" +
+                        evento.getHoraInicio() + ";" +
                         evento.getDuracion();
                 writer.println(linea);
             }
@@ -124,13 +152,13 @@ public class GestorDeReservas {
             while (scanner.hasNextLine())
             {
                 String linea = scanner.nextLine();
-                String[] datos = linea.split(",");
+                String[] datos = linea.split(";");
 
                 String titulo = datos[0];
                 Fecha fechaEvento = new Fecha(Integer.parseInt(datos[1]),Integer.parseInt(datos[2]),Integer.parseInt(datos[3]));
                 String ubicacion = datos[4];
                 String descripcion = datos[5];
-                String[] integrantes = datos[6].split("/"); // Convertir la cadena en un array
+                String[] integrantes = datos[6].split("#"); // Convertir la cadena en un array
                 int horaInicio = Integer.parseInt(datos[7]);
                 int duracion = Integer.parseInt(datos[8]);
 
@@ -162,16 +190,20 @@ public class GestorDeReservas {
     private void imprimirEventosPorConsola(){
         System.out.println("___________________________________________________");
         System.out.println("Lista de eventos:");
+        int i = 1;
         for(Evento evento : eventos) {
-            System.out.println(evento.getTitulo() + " - " + evento.getFecha().getDia() + " / "
+            System.out.println(i  + " - " + evento.getTitulo() + " - " + evento.getFecha().getDia() + " / "
                     + evento.getFecha().getMes() +  " / "
                     + evento.getFecha().getAnio() + " "
             );
+            i++;
         }
         System.out.println("___________________________________________________");
     }
 
-    private int sanitizarEntradaMinutos(int minutos, input input){
+    private int sanitizarEntradaMinutos(input input){
+        System.out.println("Introduzca los minutos: ");
+        int minutos = input.numero();
         while(minutos >=60 || minutos<0){
             System.out.println("Entrada invalida, solo se aceptarán valores entre 0 y 59");
             System.out.println("A continuacion vuelva a ingresar los minutos");
@@ -179,7 +211,9 @@ public class GestorDeReservas {
         }
         return minutos;
     }
-    private int sanitizarEntradaHora(int hora, input input){
+    private int sanitizarEntradaHora(input input){
+        System.out.println("Introduzca la hora: ");
+        int hora = input.numero();
         while( hora >= 24 || hora < 0){
             System.out.println("Entrada invalida, solo se aceptarán valores entre 0 y 23");
             System.out.println("A continuacion vuelva a ingresar la hora deseada");
@@ -236,7 +270,7 @@ public class GestorDeReservas {
         return fecha;
     }
 
-    public Fecha sanitizarEntradaFecha(input input){
+    private Fecha sanitizarEntradaFecha(input input){
 
         Fecha fecha = ingresarFecha(input);
 
@@ -248,6 +282,30 @@ public class GestorDeReservas {
 
         return fecha;
     }
+
+
+    private String[] ingresarIntegrantes(input input){
+        boolean run;
+        String[] integrantes = new String[20];
+        int pos = 0;
+        String respuesta;
+        System.out.println("ingrese el nombre del anfitrión del evento");
+        integrantes[pos] = input.string();
+        System.out.println();
+        System.out.println("Desea añadir mas integrantes?");
+        while(input.yesOrNo() && pos < 20){
+            pos++;
+            System.out.println("ingrese el nombre del integrante N°"+pos);
+            integrantes[pos] = input.string();
+            System.out.println("desea añadir otro integrante?");
+        }
+        if(pos==20){
+            System.out.println("Se alcanzo el maximo de integrantes");
+        }
+        return integrantes;
+    }
+
+
 
     public void probarPorConsola(){
         //inicializando variables para la prueba
@@ -292,88 +350,113 @@ public class GestorDeReservas {
                         int horaFin;
                         int minFin;
 
+                        Fecha fecha = sanitizarEntradaFecha(input);
+
+                        System.out.println("A continuación va introducir el horario de INICIO del evento (primero horas y luego minutos)");
+                        horaInicio = sanitizarEntradaHora(input);
+                        minInicio= sanitizarEntradaMinutos(input);
+
+                        System.out.println("A continuación va introducir el horario de FINALIZACION del evento. Este deberá ser posterior al horario de inicio. (primero horas y luego minutos)");
+
+                        horaFin  = sanitizarEntradaHora(input);
+                        minFin = sanitizarEntradaMinutos(input);
+
+                        while(horaFin < horaInicio || (horaFin == horaInicio && minFin < minInicio)){
+                            System.out.println("El horario de finalizacion debe ser posterior al horario de inicio. Debe volver a introducir ambos");
+                            System.out.println("Horario de inicio: ");
+                            horaFin  = sanitizarEntradaHora(input);
+                            System.out.println("Horario de finalizacion: ");
+                            minFin = sanitizarEntradaMinutos(input);
+                        }
+
                         System.out.println("ingrese un titulo para el evento: ");
                         titulo = input.string();
 
-                        sanitizarEntradaFecha(input);
+                        System.out.println("ingrese una descripción: ");
+                        descripcion = input.string();
+
+                        System.out.println("ingrese la ubicacion del evento: ");
+                        ubicacion = input.string();
+
+                        integrantes = ingresarIntegrantes(input);
+
+                        System.out.println("Está a punto de cargar un nuevo evento, desea continuar?");
+                        if(input.yesOrNo()){
+                            generarEvento(
+                                    titulo,
+                                    fecha,
+                                    ubicacion,
+                                    descripcion,
+                                    integrantes,
+                                    horaInicio,
+                                    minInicio,
+                                    horaFin,
+                                    minFin);
+                        }
                         break;
                     }
                     case 2:
                     {
-                        System.out.println("ingrese el numero que desea contar: ");
-                        num = input.numero();
-                        System.out.println("el elemento aparece "+String.valueOf(listaPrueba.count(num))+" veces");
+                        int indice;
+                        System.out.print("Ingrese el índice del evento que deseas eliminar: ");
+                        indice = input.numero();
+                        Evento eventoEliminar = null;
+                        if (indice > 0 && indice < eventos.size()) {
+                            int i = 1;
+                            for(Evento evento : eventos) {
+                                if(i==indice) {
+                                    eventoEliminar = evento;
+                                }
+                                i++;
+                            }
+                            if(eventoEliminar != null){
+                                System.out.println("Está a punto de eliminar el siguiente evento: ");
+                                System.out.println(indice + eventoEliminar.getTitulo() + " - " + eventoEliminar.getFecha().getDia() + " / "
+                                        + eventoEliminar.getFecha().getMes() +  " / "
+                                        + eventoEliminar.getFecha().getAnio() + " "
+                                );
+                                System.out.println("¿Desea continuar?");
+                                if(input.yesOrNo()){
+                                    eliminarEvento(eventoEliminar);
+                                }else{
+                                    System.out.println("Operacion cancelada.");
+                                }
+                            }
+                        }else{
+                            System.out.println("ingresó un indice inválido");
+                        }
                         break;
                     }
                     case 3:
                     {
-                        System.out.println("ingrese el numero del cual quiere conocer su indice: ");
-                        num = input.numero();
-                        System.out.println("el indice del elemento es "+String.valueOf(listaPrueba.index(num)));
                         break;
                     }
                     case 4:
                     {
-                        System.out.println("ingrese la posicion de la cual quiere conocer su valor: ");
-                        num = input.numero();
-                        System.out.println("El elemento ubicado en la posicion es "+String.valueOf(listaPrueba.recuperarPos(num)));
+                        try {
+                            guardarDatos();
+                            System.out.println("Eventos guardados correctamente.");
+                        } catch (IOException e) {
+                            System.out.println("Error al guardar los eventos: " + e.getMessage());
+                        }
                         break;
                     }
                     case 5:
                     {
-                        System.out.println("¿Que valor desea insertar?");
-                        num = input.numero();
-                        System.out.println("¿En que posicion desea insertar el valor?");
-                        pos = input.numero();
-                        listaPrueba.insert(num, pos);;
+                        try {
+                            cargarDatos();
+                            System.out.println("Eventos cargados correctamente.");
+                        } catch (FileNotFoundException e) {
+                            System.out.println("Error al cargar los eventos: " + e.getMessage());
+                        }
                         break;
                     }
                     case 6:
                     {
-                        listaPrueba.pop();
+                        eventos.clear();
                         break;
                     }
-
                     case 7:
-                    {
-                        System.out.println("¿Que valor desea remover?");
-                        num = input.numero();
-                        System.out.print("" + //
-                                "1 --> Remover el primero \n" + //
-                                "2 --> Remover todos \n");
-                        op = input.numero();
-                        while(op!=1 && op!=2){
-                            System.out.println("Ingrese una opción válida");
-                            op = input.numero();
-                        }
-                        if(op==1){
-                            listaPrueba.remove(num);
-                        }else{
-                            listaPrueba.removeAll(num);
-                        }
-                        break;
-                    }
-                    case 8:
-                    {
-                        if(listaPrueba.listaVacia()){
-                            System.out.println("La lista está vacia");
-                        } else{
-                            System.out.println("Hay elementos en la lista");
-                        }
-                        break;
-                    }
-                    case 9:
-                    {
-                        listaPrueba.clear();
-                        break;
-                    }
-                    case 10:
-                    {
-                        System.out.print("El largo de la lista es: ");
-                        System.out.println(metodosLista.len(listaPrueba));
-                        break;
-                    }
-                    case 11:
                     {
                         programrun = false;
                         break;
