@@ -1,3 +1,5 @@
+package clases;
+
 import java.util.TreeSet;
 
 public class Dia {

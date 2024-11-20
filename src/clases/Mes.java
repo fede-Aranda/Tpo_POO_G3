@@ -1,8 +1,10 @@
+package clases;
+
 public class Mes {
 
     //atributos
-    private Dia[] dias;
-    private int cantidadDeDias;
+    private final Dia[] dias;
+    private final int cantidadDeDias;
 
     //constructor
     public Mes(int cantidadDeDias){
@@ -16,6 +18,11 @@ public class Mes {
     }
 
     //getters
+
+
+    public int getCantidadDeDias() {
+        return cantidadDeDias;
+    }
 
     //para conseguir el dia de un mes, siempre será la posicion numero (dia-1) del array dias[]
     public Dia getDia(int dia){

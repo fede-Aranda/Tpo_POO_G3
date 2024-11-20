@@ -1,3 +1,5 @@
+package clases;
+
 public class Evento implements Comparable<Evento>{
 
     //atributos:
@@ -127,6 +129,10 @@ public class Evento implements Comparable<Evento>{
         if(duracion != newDuracion){
             setDuracion(newDuracion);
         }
+    }
+
+    public String toString() {
+        return titulo + " - " + fecha.toStringFecha(); // Usa un formato de fecha si es necesario
     }
 
     @Override
