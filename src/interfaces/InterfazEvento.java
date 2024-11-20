@@ -34,7 +34,7 @@ public class InterfazEvento extends JFrame {
         JScrollPane scrollPane = new JScrollPane(listaEventos);
         scrollPane.setBorder(BorderFactory.createTitledBorder("Eventos Disponibles"));
 
-        btnAgregarEvento = new JButton("Agregar clases.Evento");
+        btnAgregarEvento = new JButton("Agregar Evento");
         btnAgregarEvento.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

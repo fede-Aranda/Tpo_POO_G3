@@ -53,7 +53,7 @@ public class FormularioEvento extends JDialog {
 
         // Spinners para fecha y hora
         agregarCampoFormulario(formularioPanel, gbc, "Día:", spinnerDia = new JSpinner(new SpinnerNumberModel(1, 1, 31, 1)), 4);
-        agregarCampoFormulario(formularioPanel, gbc, "clases.Mes:", spinnerMes = new JSpinner(new SpinnerNumberModel(1, 1, 12, 1)), 5);
+        agregarCampoFormulario(formularioPanel, gbc, "Mes:", spinnerMes = new JSpinner(new SpinnerNumberModel(1, 1, 12, 1)), 5);
         agregarCampoFormulario(formularioPanel, gbc, "Año:", spinnerAnio = new JSpinner(new SpinnerNumberModel(2023, 1900, 2100, 1)), 6);
         agregarCampoFormulario(formularioPanel, gbc, "Hora Inicio:", spinnerHoraInicio = new JSpinner(new SpinnerNumberModel(0, 0, 23, 1)), 7);
         agregarCampoFormulario(formularioPanel, gbc, "Minuto Inicio:", spinnerMinutoInicio = new JSpinner(new SpinnerNumberModel(0, 0, 45, 15)), 8);

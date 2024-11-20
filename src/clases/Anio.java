@@ -21,7 +21,7 @@ public class Anio {
         int cantidadDeDias;
         Mes nuevomes;
         for(int mes = 0; mes < 12; mes++) { //for de meses
-            if (mes == 1 || mes == 3 || mes == 5 || mes == mes || mes == 8 || mes == 10 || mes == 12) {
+            if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12) {
                 cantidadDeDias = 31;
             } else {
                 if (mes == 2) {

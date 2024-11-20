@@ -24,7 +24,7 @@ public class DetalleEvento extends JFrame {
         this.evento = evento;
         this.gestor = gestor;
 
-        setTitle("Detalle del clases.Evento");
+        setTitle("Detalle del Evento");
         setSize(500, 400);
         setLayout(new GridBagLayout());
         setLocationRelativeTo(null);
@@ -70,7 +70,7 @@ public class DetalleEvento extends JFrame {
 
         gbc.gridx = 0;
         gbc.gridy++;
-        add(new JLabel("clases.Fecha:"), gbc);
+        add(new JLabel("Fecha:"), gbc);
         gbc.gridx = 1;
         add(lblFecha, gbc);
 
@@ -87,7 +87,7 @@ public class DetalleEvento extends JFrame {
         add(lblHoraFin, gbc);
 
         // Crear botones con estilo redondeado
-        btnEditarEvento = crearBotonConHover("Editar clases.Evento", Color.GRAY);
+        btnEditarEvento = crearBotonConHover("Editar Evento", Color.GRAY);
         btnVolver = crearBotonConHover("Volver", Color.GRAY);
 
         // Añadir botones uno al lado del otro

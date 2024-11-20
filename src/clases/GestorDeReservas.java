@@ -6,7 +6,6 @@ import java.util.Scanner; //Se utiliza un Scanner para leer el archivo línea po
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import algoritmos.input;
 
 public class GestorDeReservas {
     private Calendario calendario;
@@ -85,9 +84,8 @@ public class GestorDeReservas {
     }
 
     public void eliminarEvento(Evento eventoEnCuestion){
-        if(eventos.remove(eventoEnCuestion)){
-            calendario.eliminarEvento(eventoEnCuestion);
-        }
+        eventos.remove(eventoEnCuestion);
+        calendario.eliminarEvento(eventoEnCuestion);
     }
 
     public void editarEvento(
@@ -101,18 +99,26 @@ public class GestorDeReservas {
             int minutosInicio,
             int horaFinal,
             int minutosFinal){
+
         int duracionEnHoras = horaFinal - horaInicio;
         int duracionEnMinutos = minutosFinal - minutosInicio;
+        Fecha fechaAnterior = evento.getFecha();
+        Fecha newFecha = new Fecha(dia, mes, anio);
 
         evento.editar(
                 newTitulo,
-                new Fecha(dia, mes, anio),
+                newFecha,
                 newUbicacion,
                 newDescripcion,
                 newIntegrantes,
                 convertirHoraToPostBlock(horaInicio,minutosInicio),
                 convertirHoraToPostBlock(duracionEnHoras,duracionEnMinutos)
         );
+
+        if(!fechaAnterior.equals(newFecha)){
+            calendario.eliminarEvento(evento);
+            calendario.agregarEvento(evento);
+        }
     }
 
     //guardado y carga de datos en archivo_____________________________________________________________
@@ -162,7 +168,6 @@ public class GestorDeReservas {
             {
                 String linea = scanner.nextLine();
                 String[] datos = linea.split(";");
-
                 String titulo = datos[0];
                 Fecha fechaEvento = new Fecha(Integer.parseInt(datos[1]),Integer.parseInt(datos[2]),Integer.parseInt(datos[3]));
                 String ubicacion = datos[4];
